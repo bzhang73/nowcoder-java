@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] agrs){
+        Scanner input = new Scanner(System.in);
+        
+        while(input.hasNextFloat()){
+            Float temp = input.nextFloat();
+            int res =0;
+            temp*=10;
+            res =(int) (temp/1.0);
+            if(res%10>=5){
+                res+=5;
+            }
+            res/=10;
+            System.out.println(res);
+        }
+    }
+}
