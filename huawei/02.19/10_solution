@@ -1,0 +1,23 @@
+import java.util.Scanner;
+import java.util.HashSet;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+
+        while(input.hasNextLine()){
+            HashSet<Character> set = new HashSet<>();
+            int count=0;
+            String s = input.nextLine();
+            for(char c: s.toCharArray()){
+                if((int)c>=0 && (int)c<=127){
+                    if(!set.contains(c)){
+                        set.add(c);
+                        count++;
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+    }
+}
