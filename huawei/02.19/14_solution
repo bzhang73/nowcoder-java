@@ -1,0 +1,24 @@
+import java.util.Scanner;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        SortedMap<String,Integer> map = new TreeMap<>();
+        
+        for(int i=0;i<=n;i++){
+            String s = input.nextLine();
+            if(i==0)
+                continue;
+            map.putIfAbsent(s,0);
+            map.put(s, map.get(s)+1);
+        }
+        
+        for(String a: map.keySet()){
+            for(int i=0;i<map.get(a);i++)
+                System.out.println(a);
+        }
+}
+    }
