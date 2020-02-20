@@ -1,0 +1,21 @@
+import java.util.Scanner;
+import java.util.HashSet;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        
+        String s = String.valueOf(input.nextInt());
+        
+        HashSet<Integer> set = new HashSet<>();
+        int res=0;
+        for(int i=s.length()-1;i>=0;i--){
+            int temp = (int)(s.charAt(i)-'0');
+            if(!set.contains(temp)){
+                res=res*10+temp;
+                set.add(temp);
+            }
+        }
+        System.out.println(res);
+    }
+}
