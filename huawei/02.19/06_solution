@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        
+        while(input.hasNextLong()){
+            long temp = input.nextLong();
+            String res = getResult(temp);
+            System.out.println(res);
+        }
+    }
+    
+    public static String getResult(long ulDataInput){
+        String res = "";
+        
+        long i =2;
+        while(i<=ulDataInput){
+            while(ulDataInput%i==0){
+                res += i+" ";
+                ulDataInput/=i;
+            }
+            i++;
+        }
+        return res;
+    }
+}
