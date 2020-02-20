@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        
+        while(input.hasNextLine()){
+            String s = input.nextLine();
+            
+            char[] sc = s.toCharArray();
+            int res = 0;
+            for(int i=0;i<sc.length;i++){
+                if(sc[i]>='A' && sc[i]<='F'){
+                    res = res*16+10+(int)(sc[i]-'A');
+                }else if(sc[i]>='0' && sc[i]<='9'){
+                    res = res*16+(int)(sc[i]-'0');
+                }
+            }
+            
+            System.out.println(res);
+        }
+    }
+}
