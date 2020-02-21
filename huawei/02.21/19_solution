@@ -1,0 +1,65 @@
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        
+        Queue<String[] > queue = new LinkedList<>();
+        HashMap<String,HashMap<String, Integer>> map = new HashMap<>();
+        
+        while(input.hasNextLine()){
+            String s = input.nextLine();
+            
+            String[] temp = s.split(" ");
+            
+            int i=0;
+            while(i<temp.length){
+                
+                String name="";
+            String value="";
+             while(i<temp.length && temp[i].equals("") )
+                 i++;
+             if(i==temp.length)
+                 break;
+            
+            for(int j=temp[i].length()-1;j>=0 && j>=temp[i].length()-17;j--){
+                if(temp[i].charAt(j)=='\\' || j==temp[i].length()-17){
+                    name = temp[i].substring(j+1);
+                    break;
+                }
+            }
+            while(temp[i].equals(""))
+                 i++;
+            
+           value=temp[i];
+                
+            
+            if(queue.size()<8){
+                queue.offer(new String[]{name,value});
+                
+                map.putIfAbsent(name, new HashMap<String,Integer>());
+                map.get(name).putIfAbsent(value,0);
+                map.get(name).put(value, map.get(name).get(value)+1);
+            }else{
+                String[] remove = queue.poll();
+                
+                queue.offer(new String[]{name,value});
+                
+                map.putIfAbsent(name, new HashMap<String,Integer>());
+                map.get(name).putIfAbsent(value,0);
+                map.get(name).put(value, map.get(name).get(value)+1);
+            }
+                i++;
+            }
+            
+        }
+        
+        while(!queue.isEmpty()){
+            String[] res = queue.poll();
+            System.out.println(res[0]+" "+res[1]+" "+map.get(res[0]).get(res[1]));
+        }
+    }
+}
