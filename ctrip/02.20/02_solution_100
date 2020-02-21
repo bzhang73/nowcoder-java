@@ -1,0 +1,72 @@
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class Main {
+    private static int size;
+    private static HashMap<Integer,Integer> map = new HashMap<>();
+    private static Stack<Integer> stack = new Stack<>();
+    private static HashSet<Integer> set = new HashSet<>();
+    
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        size = input.nextInt();
+       
+        
+        while(input.hasNextLine()){
+            String a = input.nextLine();
+            String[] split = a.split(" ");
+            if(split[0].equals("p")){
+                put(Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+            }else if(split[0].equals("g")){
+                int d = get(Integer.parseInt(split[1]));
+                System.out.println(d);
+            }
+        }
+    }
+    
+    private static int get(int key){
+        if(!set.contains(key)){
+            return -1;
+        }else{
+            Stack<Integer> temp = new Stack<>();
+            while(stack.peek() != key){
+                temp.push(stack.pop());
+            }
+            stack.pop();
+            while(!temp.isEmpty()){
+                stack.push(temp.pop());
+            }
+            stack.push(key);
+            
+            return map.get(key);
+        }
+    }
+    
+    private static void put(int key, int value){
+        if(size==0)
+            return ;
+        if(map.size()<size && !set.contains(key)){
+            stack.push(key);
+            set.add(key);
+            map.put(key,value);
+        }else if(set.contains(key)){
+            
+            map.put(key,value);
+        }else{
+            Stack<Integer> temp = new Stack<>();
+            while(!stack.isEmpty()){
+                temp.push(stack.pop());
+            }
+            int old = temp.pop();
+            set.remove(old);
+            while(!temp.isEmpty()){
+                stack.push(temp.pop());
+            }
+            stack.push(key);
+            set.add(key);
+            map.put(key,value);
+        }
+    }
+}
